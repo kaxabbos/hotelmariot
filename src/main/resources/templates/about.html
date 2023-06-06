@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>О нас</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/def/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page" >
+    <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info bg-light p-2 rounded-5">О нас</h2>
+            </div>
+            <div class="row bg-light p-2 rounded-5">
+                <div class="col-12" align="justify"><p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. At blanditiis consectetur eaque eos et ex, in magnam
+                    molestiae nihil nobis odio quae quam quibusdam ratione sapiente sequi sint voluptas
+                    voluptates?</p></div>
+                <div class="col-12" align="justify"><p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. A aperiam debitis nesciunt saepe ullam voluptas? Animi
+                    assumenda blanditiis enim et, fugiat itaque iusto libero odio officia praesentium veniam
+                    voluptate voluptatibus!</p></div>
+                <div class="col-12" align="justify"><p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. At cupiditate delectus dolorem, doloribus ea magnam odit sed
+                    veniam. Commodi doloribus esse excepturi facilis molestias optio saepe similique soluta voluptas
+                    voluptatum?</p></div>
+                <div class="col-12" align="center">
+                    <iframe allowfullscreen="" frameborder="0" loading="lazy"
+                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCGz6HJDVY9fht_jGVCprEpRCwZ8PSsqhc&amp;q=Minsk&amp;zoom=11"
+                            width="75%" height="400"
+                            style="box-shadow: 0 0 6px;border-radius: 5px;border: 1px solid rgb(255,255,255);width: 100%;margin-top: 15px;height: 500px;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Мои брони</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/def/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page catalog-page">
+     <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading bg-light p-2 rounded-5 mt-5">
+                <h2 class="text-info">Мои брони</h2>
+            </div>
+            <div class="content">
+                <div class="row g-0">
+                    <div th:each="c : ${rooms}" class="col-12 col-md-6 col-lg-4 col-xl-3">
+                        <div class="clean-product-item">
+                            <div class="image">
+                                <a th:href="'/rooms/' + ${c.id}">
+                                    <img class="img-fluid d-block mx-auto" th:src="'/img/' + ${c.photos[0]}">
+                                </a>
+                            </div>
+                            <div class="product-name"><a th:href="'/rooms/' + ${c.id}" th:text="${c.name}"></a></div>
+                            <div class="product-name">
+                                <a class="btn" role="button" th:href="'/rooms/return/' + ${c.id}">Выселиться</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${room.name}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/def/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading bg-light p-2 rounded-5 mt-5">
+                <h2 class="text-info" th:text="${room.name}"></h2>
+            </div>
+            <div class="block-content">
+                <div class="product-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="carouselExample" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div  class="carousel-item active">
+                                        <img th:src="'/img/' + ${room.photos[0]}" class="d-block w-100">
+                                    </div>
+                                    <div th:each="p : ${room.photosAfter()}" class="carousel-item">
+                                        <img th:src="'/img/' + ${p}" class="d-block w-100">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info">
+                                <h3 style="font-weight: bold;">Цена за сутки: <span th:text="${room.price}"></span></h3>
+                                <div class="summary">
+                                    <p style="font-size: 20px;">Статус:&nbsp;
+                                        <span th:if="${room.free}" style="color: var(--bs-green);">Свободен</span>
+                                        <span th:unless="${room.free}" style="color: var(--bs-red);">Арендован</span>
+                                    </p>
+                                </div>
+                                <div th:if="${role == 'MANAGER'}" class="summary mb-3">
+                                    <a th:href="'/rooms/edit/' + ${room.id}" class="btn btn-success" type="button"
+                                       style="margin-right: 15px;">
+                                        Редактировать
+                                    </a>
+                                    <a th:if="${room.free}" th:href="'/rooms/delete/' + ${room.id}" class="btn btn-danger"
+                                       type="button">Удалить</a>
+                                </div>
+                                <div th:if="${role == 'CLIENT' and room.free}" class="summary">
+                                    <form method="post" th:action="'/rooms/rent/' + ${room.id}">
+                                        <div class="row">
+                                            <div class="col-xl-8">
+                                                <input class="form-control form-control-lg" type="number" name="days"
+                                                       min="1" max="100" step="1" placeholder="Дней"></div>
+                                            <div class="col-xl-4">
+                                                <button class="btn btn-primary" type="submit">Арендовать</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="summary">
+                                    <p th:text="${room.description.description}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="stat">Категория номеров</td>
+                                <td th:text="${room.description.type.name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Этаж</td>
+                                <td th:text="${room.description.getFloor}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Количество мест</td>
+                                <td th:text="${room.description.beds.name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Номер комнаты</td>
+                                <td th:text="${room.description.getNumber}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<nav th:fragment="nav" class="navbar navbar-light navbar-expand-lg clean-navbar" style="background: #e1c595">
+    <div class="container"><a class="navbar-brand logo" href="/">HotelMariot</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li th:if="${role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/rooms/add">Пополнить базу номеров</a></li>
+                <li th:if="${role == 'ADMIN'}"class="nav-item"><a class="nav-link" href="/users">Управление правами</a></li>
+                <li th:if="${role == 'ADMIN'}"class="nav-item"><a class="nav-link" href="/statistics">Финансовая статистика</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Доступные номера</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">О нас</a></li>
+                <li th:if="${role == 'CLIENT'}"class="nav-item"><a class="nav-link" href="/rooms/my">Мои брони</a></li>
+                <li th:if="${role == 'NOT'}"class="nav-item"><a class="nav-link" href="/login">Вход</a></li>
+                <li th:if="${role == 'NOT'}"class="nav-item"><a class="nav-link" href="/reg">Регистрация</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item">
+                    <form action="/logout" method="post">
+                        <button class="btn" type="submit">Выход</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Пополнить базу номеров</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/def/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading bg-light p-2 rounded-5 mt-5">
+                <h2 class="text-info">Пополнить базу номеров</h2>
+            </div>
+            <div class="block-content">
+                <form action="/rooms/add" method="post" enctype="multipart/form-data">
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Название</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required="" name="name"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Цена за сутки</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1" max="500"
+                                                        step="1" required="" name="price"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Категория номеров</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="type">
+                                        <option th:each="b : ${types}" th:value="${b}"
+                                                th:label="${b.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Этаж</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1" max="5000"
+                                                        step="1" required="" name="floor"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Количество мест</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="beds">
+                                        <option th:each="f : ${beds}" th:value="${f}" th:label="${f.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Номер комнаты</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1"
+                                                        step="1" required="" name="number"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Фотография</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="file" multiple="" required=""
+                                                        accept="image/*" name="photos"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Описание</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required="" name="description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" style="margin-right: 15px;">Пополнить базу номеров</button>
+                            <button class="btn btn-secondary" type="reset">Очистить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

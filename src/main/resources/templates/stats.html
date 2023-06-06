@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Финансовая статистика</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/def/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading bg-light p-2 rounded-5 mt-5">
+                <h2 class="text-info">Финансовая статистика</h2>
+            </div>
+            <div class="block-content">
+                <div hidden>
+                    <span id="topPriceName0" th:text="${topPriceName[0]}"></span>
+                    <span id="topPriceNumber0" th:text="${topPriceNumber[0]}"></span>
+                    <span id="topPriceName1" th:text="${topPriceName[1]}"></span>
+                    <span id="topPriceNumber1" th:text="${topPriceNumber[1]}"></span>
+                    <span id="topPriceName2" th:text="${topPriceName[2]}"></span>
+                    <span id="topPriceNumber2" th:text="${topPriceNumber[2]}"></span>
+                    <span id="topPriceName3" th:text="${topPriceName[3]}"></span>
+                    <span id="topPriceNumber3" th:text="${topPriceNumber[3]}"></span>
+                    <span id="topPriceName4" th:text="${topPriceName[4]}"></span>
+                    <span id="topPriceNumber4" th:text="${topPriceNumber[4]}"></span>
+                </div>
+                <div id="topPrice" style="width: 100%; height: 500px;"></div>
+                <hr>
+                <div class="row d-xl-flex" style="margin-bottom: 15px;">
+                    <div class="col d-xl-flex justify-content-xl-center"></div>
+                    <div class="col d-xl-flex justify-content-xl-start">
+                        <h4>Суммарная прибыль</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-end">
+                        <h4 th:text="${income}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center"></div>
+                </div>
+                <hr>
+                <div class="row d-xl-flex" style="margin-bottom: 15px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Название</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Цена</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Дней аренды</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Прибыль</h4>
+                    </div>
+                </div>
+                <div th:each="s : ${statistics}" class="row d-xl-flex" style="margin-bottom: 15px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.getRoom.name}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.getRoom.price}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.days}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.days * s.getRoom.price}">Прибыль</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ["corechart"]});
+    google.charts.setOnLoadCallback(drawChart4);
+
+    function drawChart4() {
+        var topPriceName0 = document.querySelector('#topPriceName0').textContent;
+        var topPriceNumber0 = parseInt(document.querySelector('#topPriceNumber0').textContent);
+        var topPriceName1 = document.querySelector('#topPriceName1').textContent;
+        var topPriceNumber1 = parseInt(document.querySelector('#topPriceNumber1').textContent);
+        var topPriceName2 = document.querySelector('#topPriceName2').textContent;
+        var topPriceNumber2 = parseInt(document.querySelector('#topPriceNumber2').textContent);
+        var topPriceName3 = document.querySelector('#topPriceName3').textContent;
+        var topPriceNumber3 = parseInt(document.querySelector('#topPriceNumber3').textContent);
+        var topPriceName4 = document.querySelector('#topPriceName4').textContent;
+        var topPriceNumber4 = parseInt(document.querySelector('#topPriceNumber4').textContent);
+        var data = google.visualization.arrayToDataTable([
+            ['Название', 'Дней', {role: 'style'}, {role: 'annotation'}],
+            [topPriceName0, topPriceNumber0, "red", topPriceNumber0],
+            [topPriceName1, topPriceNumber1, "brown", topPriceNumber1],
+            [topPriceName2, topPriceNumber2, "green", topPriceNumber2],
+            [topPriceName3, topPriceNumber3, "blue", topPriceNumber3],
+            [topPriceName4, topPriceNumber4, "purple", topPriceNumber4],
+        ]);
+
+
+        var options = {
+            title: 'Топ-5 бронируемых номеров',
+            hAxis: {title: 'Название'},
+            vAxis: {title: 'Дней'},
+            bar: {groupWidth: "80%"},
+            legend: {position: "none"}
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('topPrice'));
+        chart.draw(data, options);
+    }
+</script>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>
